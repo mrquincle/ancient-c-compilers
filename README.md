@@ -8,7 +8,7 @@ Links to old code give at times quite some authority to a question. See this ref
 
 * [Why was the switch statement designed to need a break? where is referred to the Sun ANSI C compiler front end](https://stackoverflow.com/questions/252489/why-was-the-switch-statement-designed-to-need-a-break) by Peter van der Linden.
 
-If you really want to know why `switch` statements have breaks or why other choices have been made, it might be worthwhile to look how they were used in the code. For example, I see a lot of fall-throughs in this code! Off-topic, but I think the real reason is different. A `switch` statement is quite a "flat" structure. A person who likes a `switch` statement does probably not like a `break` like this:
+If you really want to know why `switch` statements have breaks or why other choices have been made, it might be worthwhile to look how they were used in the code. For example, I see a lot of fall-throughs in this code! Off-topic, but I think the real reason is different. A `switch` statement is quite a "flat" structure. A person who likes a `switch` statement does probably not like a piece of code like this (with implicit breaks):
 
 	switch(p) {
 	case 0: 
@@ -39,7 +39,7 @@ But probably more like this:
 		break;
 	case 1:
 		// do something
-    		break;	
+		break;	
 	}
 
 Just my two cents, but I personally understand why people who love switches would love breaks as well, especially if the horizontal screen estate was much more limited in those days.
