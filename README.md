@@ -2,9 +2,48 @@
 
 Stackoverflow, while a really great site, sometimes has a SPAM policy that is a bit too strict. Of course, it is logically they want to prevent people from advocating their own software. A question that would initiate a lot of answers regarding pointers to different ancient C compilers and would be a great resource for people online, [can not make it](https://stackoverflow.com/questions/25266909/where-is-the-source-code-for-the-earliest-c-compilers).
 
+## Why bother about old code?
+
 Links to old code give at times quite some authority to a question. See this reference to an analysis of source code of an early compiler, e.g.:
 
 * [Why was the switch statement designed to need a break? where is referred to the Sun ANSI C compiler front end](https://stackoverflow.com/questions/252489/why-was-the-switch-statement-designed-to-need-a-break) by Peter van der Linden.
+
+If you really want to know why `switch` statements have breaks or why other choices have been made, it might be worthwhile to look how they were used in the code. For example, I see a lot of fall-throughs in this code! Off-topic, but I think the real reason is different. A `switch` statement is quite a "flat" structure. A person who likes a `switch` statement does probably not like a `break` like this:
+
+	switch(p) {
+	case 0: 
+		if (error_cond1) {
+			// do something
+		} else {
+			if (error_cond2) {
+				// do something
+			} else {
+				// do something
+			}
+		}
+	case 1:
+		// do something
+	}
+
+But probably more like this:
+
+	switch(p) {
+	case 0:
+		if (error_cond1) {
+			break;
+		} 
+		if (error_cond2) {
+			break;
+		} 
+		// do something
+		break;
+	case 1:
+		// do something
+    		break;	
+	}
+
+Just my two cents, but I personally understand why people who love switches would love breaks as well, especially if the horizontal screen estate was much more limited in those days.
+
 
 # Source code
 
