@@ -1,0 +1,56 @@
+	beq	3f / no
+	incb	(r2) / increment column count
+	bitb	$7,(r2) / are bits 0, 1 and 2 set at col 0%8
+	beq	1f / no
+	movb	$11,1(r2) / yes, place ht in another tab next time
+	br	1f / 3rd byte of tty area (character left over after
+		   / "lf")
+3:
+	movb	(r2),r3 / place column count in r3
+	bisb	$7,(r2) / make bits 0, 1 and 2 of column count = 1
+	incb	(r2) / increment column count
+	bis	$!7,r3 / clear bits 3-15 of r3
+	neg	r3 / delay = dcol start to determine tout entry for
+		   / tty out
+	br	2f / by neg r3
+4:
+	mov	$176.,r3 / delay = lots start to determine tout entry
+	br	2f
+5:
+	mov	$10.,r3 / cr delay 160ms for tn300 start to determine
+		        / tout
+	clrb	(r2) / set column count = 0 entry
+2:
+	add	$5,r3 / time for this char,increment value for tout
+		     / entry by 5
+	mov	(sp),r2 / 0%8 r2 contains 8xtty number
+	asr	r2
+	asr	r2
+	asr	r2 / 0%1 r2 contains tty number
+	movb	r3,toutt+3(r2) / place value for tout entry into tout
+			       / table
+1:
+	rts	r0 / return
+
+partab:	/ contains 3 digits for each character; digit 2 is used
+	/ to determine if 200 is to added to ASCII code digits 0
+	/ and 1 are used to determine value for jump table.
+	.byte 002,202,202,002,202,002,002,202
+	.byte 204,010,006,212,012,214,202,002
+	.byte 202,002,002,202,002,202,202,002
+	.byte 002,202,202,002,202,002,002,202
+	.byte 200,000,000,200,000,200,200,000
+	.byte 000,200,200,000,200,000,000,200
+	.byte 000,200,200,000,200,000,000,200
+	.byte 200,000,000,200,000,200,200,000
+	.byte 200,000,000,200,000,200,200,000
+	.byte 000,200,200,000,200,000,000,200
+	.byte 000,200,200,000,200,000,000,200
+	.byte 200,000,000,200,000,200,200,000
+	.byte 000,200,200,000,200,000,000,200
+	.byte 200,000,000,200,000,200,200,000
+	.byte 200,000,000,200,000,200,200,000
+	.byte 000,200,200,000,200,000,000,202
+
+xmtt:
+	jsr	r0,cpass / get next character from user buffer area

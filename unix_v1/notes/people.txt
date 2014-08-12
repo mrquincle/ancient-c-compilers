@@ -1,0 +1,102 @@
+
+sep 14 1972
+Theodore R. Bashkow  - presented the study, cover sheet of jun72
+  columbia university and bell labs?
+  (emailed Gerald Navratil dean at gen2@cs.columbia.edu 5/20 to ask
+   if he knows more.  columbia has an award in honor of TRB)
+
+
+
+Addressed to
+    W. S. Bartlett
+    D. P. Clayton
+    D. H. Copp
+    G. J. Hansen (f)
+    J.    Hintz (f)
+    L. J. Kelly
+    R. L. Klein (f)
+    J. J. Ludwig
+    J. F. Maranzano
+    G.    Pettit
+    J. E. Ritacco
+    B. A. Tague
+    D. W. Vogel
+    L. S. Wright (f)
+copy to
+    G. L. Baldwin
+
+
+MH-8234-TRB-mbh
+room 2a-418 at murray hill.
+
+-
+D.H. Copp, "A Way to Slice the MAC-8 Register Set in Overlapping Steps," Unpublished Memorandum, Bell Laboratories (27 August, 1975).
+  cited by David R. Ditzel bell labs and H.R. McLellan MIT in 1982
+
+CIL - Common Intermediate Language. "Construction of a Transportable, Milti-Pass Compiler for Extended Pascal", G.J. Hansen et al, SIGPLAN Notices 14(8):117-126 (Aug 1979).
+  http://portal.acm.org/citation.cfm?id=806961&coll=portal&dl=ACM
+  texas instruments
+
+J. F. Maranzano, S. R. Bourne, "A Tutorial Introduction to ADB", may 1977
+   Joseph F. Maranzano
+   http://portal.acm.org/citation.cfm?id=1053649
+   vp engineering, millennium services, 2005.
+   http://portal.acm.org/citation.cfm?id=18007.18021 1986 with B A Tague
+   "Joseph F. Maranzano is vice president of engineering at Millennium
+   Services.  His research interests include software architecture and
+   project management.  He received his MS in electrical engineering from
+   New York University.  He's a member of the IEEE and a Bell Labs fellow.
+   Contact him at 63 Pomeroy Rd, Madison, NJ 07940; jfm@att.net"
+   http://home.att.net/~jfm/
+   Sent email may 20 2008.
+
+J. E. Ritacco, T. J. Pedersen, J. A. Santillo "Software development tools"
+   at&t bell laboratories tecnical journal, 1985 vol 64 no 1 pp 287-304
+
+Berkeley Tague
+   Interview: http://www.princeton.edu/~mike/unixhistory
+   neat article mentions him (interview with lions!)
+   http://www.ais.org/~jrh/acn/Back_Issues/Back_Issues%5B1993-1997%5D/ACN6-1.pdf
+   head Unix Support Group at the labs, formed sept 1973
+   berktague@mac.com
+   cc'd by jfm.
+
+Linda S. Wright.
+   http://portal.acm.org/citation.cfm?id=1041716
+
+G. L. Baldwin
+   1973 letter cited by http://portal.acm.org/citation.cfm?id=800025.1198417
+S. K. Tewksbury, N. Linde, V. D. Archer, C-Y Kao and G. L. Baldwin, "A high speed, partially asynchronous code converter for digital signal processing in telephony," (1980).
+S. K. Tewksbury and G. L. Baldwin, "Partially asynchronous interface with compressed-linear code conversions," (1977).
+
+
+------------------
+jun 20 1972
+J. DeFelice
+
+Jim DeFelice, also author of kernel subroutine descriptions mar72.
+"ISSUE D  DATE 2/7/72  ID UNIX  SEC H.0  PAGE 6"
+about a month before "ID IMO.1-1" "UNIX IMPLEMENTATION".
+
+Same contents as the typewritten sections H0-H9 of the later document.
+Possibly the source for the type written document.
+The cover sheet mentions more sections, but we only have "H":
+
+    A symbol table (not done)
+    B memory map
+    C routine jump network
+    D
+    E listings
+    F general description of system
+    G description of data names
+    H routine descriptions
+
+
+140 Centennial Ave
+Rm G155
+R. R9-463-4004
+From MH 165-<di_tt_n>-4004
+            garbled
+
+"Here's a copy of our current UNIX documentation"
+

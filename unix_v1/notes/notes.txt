@@ -1,0 +1,303 @@
+Original Source:
+http://www.bitsavers.org/pdf/bellLabs/unix/PreliminaryUnixImplementationDocument_Jun72.pdf
+
+
+------
+I started with the pdf, using Preview in mac I selected regions and
+copied and created new doc, saved it as jpeg and then used
+the online OCR program: http://asv.aso.ecei.tohoku.ac.jp/tesseract/
+I then manually edited each file.
+
+The files are named according to the page index in the pdf and the
+section and page given in the page footer.  Page headers and footers
+were not captured.
+------------------
+
+e00-01 to e00-10 (10) - u0 -
+   assigned: tim newsham, complete
+   reviewed:
+e01-01 to e01-10 (10) - u1 - 
+   assigned: Hellwig Geisse
+   reviewed:
+      (reviewed e01-01 to e01-06 - tim newsham)
+e02-01 to e02-10 (10) - u2 -
+   assigned: Brantley Coile, complete
+   reviewed: tim newsham
+e03-01 to e03-04 (4) - u3 -
+   assigned: Tim Bradshaw,
+             (Brad Parker, complete)
+   reviewed:
+e04-01 to e04-07 (7) - u4 -
+   assigned: Alex Garbutt,
+             (Brad Parker, complete)
+   reviewed:
+e05-01 to e05-06 (6) - u5 -
+   assigned: Ralph Logan, complete
+   reviewed: johan beiser
+e06-01 to e06-06 (6) - u6 -
+   assigned: johan beisser, complete
+   reviewed:
+e07-01 to e07-08 (8) - u7 -
+   assigned: Naoki Hamada, complete
+   reviewed:
+e08-01 to e08-09 (9) - u8 -
+   assigned: Christian David,
+             (Brad Parker, complete)
+   reviewed:
+e09-01 to e09-08 (8) - u9 -
+   assigned: tim newsham, complete
+   reviewed: Ralph Logan
+e10-01 to e10-02 (2) - ux -
+   assigned: tim newsham, complete
+   reviewed:
+e11-01 to e11-07 (7) - sh
+   we have a binary for the sh already I think.  this may be optional
+   assigned: johan beisser, complete
+   reviewed: tim newsham, complete
+e12-01 to e12-04 (4) - init 
+   we have a binary for init already
+   assigned: tim newsham, complete
+   reviewed:
+
+
+
+------------------
+e00-01 
+    - I used spaces to line up the comment columns, not tabs.  I
+      picked the column distance arbitrarily.
+    - the bottom section looks like it could be tabbed but my tabstops
+      didnt line up with the values given so I used spaces
+
+    - (Brad Parker) removed commented out 3 lines at "4;4". The comment
+      appears to be written in and is wrong (I think it might just be a 
+      stroke of the pen rather than a correction)
+
+e00-02
+    - I used tabs for the start of each asm command but not for the
+      separation between mnemonic and arguments since these didnt line up.
+      with my tab stops.
+
+e00-03
+    - left "dis addresses" typo in per original
+
+e00-04
+    - This instruction doesnt make sense: "dec    r0 / r0=33.,...,1 "
+      r0 is used as the jsr link register.  However, r1 has the
+      value of 34 prior to this.  Changed both occurances of "r0" to
+      "r1" in this code.
+
+e00-05
+    - cant tell if the "O" in quotes after 1: is a O or a 0.
+    - left mispelled "mormally" in comment
+    - left "file/etc/init" without space.
+
+e00-06
+    - left mis-spacing on 5: move r5,r1.
+
+e00-10
+    - left "/ect/init" typo
+      - changed this to "/etc/init".  There is no "/ect" directory
+        on the rf0 drive at the point the cold init is run and 
+        the cold init program doesnt make any new directories, so
+        this is likely just a typo in the original printout.
+
+------
+e01-06
+    - "r2, p pid-2(r1)" has written correction "p.ppid".  Using written
+       correction.
+    - "mov $sysret1,(sp)" has written correction for "-(sp)".  Using
+
+--------------------
+e02-03
+    - "mov     $rtssym,*30" in sysexec is incorrect.  It overwrites
+      the first byte of the rtssym function with the rtssym address.
+      It should read "move $rtssym,30" which writes the address of
+      rtssym to the trap vector.
+e02-05
+    - label "1:" is overstruck with "/" in the listing.  leaving the
+      label in place.  Should be reviewed for semantic meaning.
+      - the struck label is referenced below as "1b" right before
+        "nig:" on e02-06.  I believe removing the label would cause
+        an extra comparison to occur but not change he semantics of
+        the loop.
+e02-09
+    - extra label "sysquit:" handwritten after "sysintr:".  Leaving
+      the extra label out.
+      - adding it back in.  this label is referenced in the syscall
+        table (u1.s) but not defined elsewhere.
+e02-10
+    - comment says "cdev has device =" it probably means "#" and could
+      have just been a weak print of "#", but leaving as "=".
+
+--------------------
+
+e03-*
+    - I used spaces to line up columns, not tabs.
+
+--------------------
+
+e04-*
+    - I used spaces to line up columns, not tabs.
+
+e04-06
+    - comment seems to have "not equal" character in it (equals + slash);
+      since my keyboard won't do that, I substituted "<>"
+
+--------------------
+I noticed that "inode" and "i-node" were used interchangably, which could possibly
+indicate two different people commenting the code.  I left each as the original.
+
+e05-01
+    - line 9 has a crossed out term, so i used the correction "r2"
+
+e05-02
+    - line 48 comment says "panic / found no tres storage" - left it as "tres"
+      no idea whether it is supposed to be "tree", "free", or "tres"
+      - reviewed, looks clearly "free", fixed.
+
+e05-04
+    - some of the latter parts of the code have comments "/ ?", left as is
+
+e05-05
+    - looks like some of the comments contain a "does not equal symbol" manually
+      created by typing =<backspace>/.  I symbolized it with "=/".
+--------------------
+e06:
+    - Used tabs between sections of code instead of spaces.
+      For example:
+	bpn	rtty0 / comment
+
+      This may need some review later. I'll go over it again this afternoon.
+--------------------
+I used spaces in all occasions because I did not fully understand
+where to put tabs. We can convert them easily by a small program
+if the rule is specified, so I leave them there.
+
+e07-01
+    - left "cmp     r0,$4" as is. There is a write in correction 
+      for "r1" for "r0".
+      - reviewed this, r1 has the character at this point and $4 is
+        control-D.  The write-in looks correct.
+    - left "to" as is after ttych: There is a write in correction
+      for "from" instead of "to".
+
+e07-04
+    - left "asr     r0" as is. There is a write in correction 
+      for "r2" for "r0".
+      - changed it to "r2".  The comments clearly say "r2".  The
+        value comes from a call to "get" right before the call to
+        this code ("put"), a page earlier inside the getc function.
+        "r2" was previously multipled by 2 in get, so this divide
+        by 2 makese sense to undo that.
+
+e07-07
+    - printout has: "mov    $240.*$ps" but this is invalid syntax and
+      there are other occurances where the "." is a comma.  I'm
+      changing this to be valid assembly -timnewsham.
+
+e07-08
+    - There is a handwritten addendum "super block" after the line 
+      "jsr     r0, ppoke" which clarifies the comment.
+--------------------
+
+e08-*
+    - I used spaces to line up columns, not tabs.
+
+e08-02
+    - the bread function is missing a branch when copying data from
+      kernel memory (r5) to user memory (r2).  I added a branch:
+      1: / r5 points to beginning of data in I/O buffer, r2 points to beginning
+         / of users data
+             movb    (r5)+,(r2)+ / move data from the I/O buffer
+             dec     r3 / to the user's area in core starting at u.base
+             bne     1b 
+             ^^^^^^^^^^^
+             tst     u.count / done
+             beq     1f / yes, return
+       without this it only copies one byte to userland.
+
+--------------------
+e09-01
+    - I'm using tabs between opcode and operands now
+    - left "bic $!77,r1" although written comment says "? !177"
+      - changing to "$!177".  This is masking off the high bit of
+        the received ascii character.  shortly after this it compares
+        with $177 (delete) so clearly its not supposed to mask off
+        both hight bits ($!77).  Also later in the other e09 pages
+        similar operations are performed.
+e09-02
+    - left "movb    tty+38r0),r1" as is.  There's a write in 
+      correction for "(" instead of "8".  This concerns me as it
+      means there are probably some errors in this listing as
+      the paren is most likely the right character here.
+      - fixed this to allow assembly to work.
+e09-03
+    - hard to tell due to hand written correction, but I believe
+      the line before "rts r0" reads "mov (sp)+,r0"
+      - this makes sense since r0 is pushed onto the stack at the
+        start of the function.
+    - comment "ASC11" (one instead of I) left as is.
+e09-04
+    - text comment says a label was lost!  leaving it out for now.
+      - adding it back.  This looks like a switch table starting
+        at the missing label (or actually one instruction before
+        the label, weird that they wrote it this way).
+    - correction "if count >=0" obscures original text in comment.
+      no choice but to use new text.
+    - "ASC11" sic
+e09-05
+    - 5th to last "byte" line 2nd column is uneadable.  pattern suggests
+      the value "000"
+
+--------------------
+e10-01
+e10-02
+   - I used tabs for the first tab stop and spaced out to the next step.
+   - Per discussions with Brantley Coile it appears that the origianl
+     source probably used tabs, and that the printout has a tab stop
+     after 8 characters and another after 7 characters.  The spaces
+     between opcode and operands are probably due to a tab, as can be
+     seen in later assembly code we have in machine readable form.
+-------------------
+e11-01
+   - I'm using a whole bunch of guesswork on some of these. Keystrokes
+     are highly faded, and have to be guessed. The OCR utterly failed.
+   - changed "shel larg" in 2nd asm line to "shellarg" to match the
+     variable defined in e11-07.
+   - changed "cdpb B(r5),$'-"  to "cmpb 8(r5),$'-" which seems like
+     what the code is trying to do.  Left the "calleZd" and "loginx~"
+     typos in the comments as is.
+     - I compared this against the s2 binary for /bin/sh and the
+       code sequence looks similar.  This instruction is 
+       "cmpb  @2(R5),#55" which properly does what the comments say.
+       It reads argv[0][0] and compares with '-'.  Edited this
+       code to be in agreement.
+   - uncommented string after "jsr r5, error" line since other calls to
+     error are followed by literal strings.
+e11-02
+   - Line 15 has manual corrections, making it difficult to read what
+     was added or subtracted.
+     chose "arg ptr to parp" as interpretation based on existance of
+     "parp" variable on last page.
+e11-03
+   - "dkip" in comment after 4: probably means "skip", but left as is.
+e11-04
+   - First lines are horribly mangled. Guessed.
+   - Line 7 has a typo, preserved
+   - Line 8 has what resembles a "|", not sure if this is a screwup or
+     not. Preserved, and assuming it's a "|".
+     - removed the "|" it looks like an extra chracter got inserted
+       that is not valid assembly.
+   - line 21/22: I have no idea.
+     - removed additional extra tick characters at "rts" line.
+       but left the extra tick mark in the following comment.
+e11-06
+   - comment after "rts pc" uses "ro" instead of "r0", left as is.
+   - towards enf of page "add r01,r0"  what is this supposed to be?
+     I think this is "add r1,r0" based on surrounding code.  trying that.
+---------------------
+e12-01
+   - "rko5" in comments left as is (vs "rk05")
+   - acceped overwritten "ttyx" over the obscured original "xxxx"
+
+

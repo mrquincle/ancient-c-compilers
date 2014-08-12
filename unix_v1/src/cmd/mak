@@ -1,0 +1,34 @@
+echo acct.s; as acct.s; mv a.out acct
+echo ar.s; as ar.s; mv a.out ar
+echo cat.s; as cat.s; mv a.out cat
+echo chmod.s; as chmod.s; mv a.out chmod
+echo chown.s; as chown.s; mv a.out chown
+echo cmp.s; as cmp.s; mv a.out cmp
+echo colon.s; as colon.s; mv a.out :
+echo date.s; as date.s; mv a.out date
+echo df.s; as df.s; mv a.out df
+echo dsw.s; as dsw.s; mv a.out dsw
+echo dusg.s; as dusg.s; mv a.out dusg
+echo fstrip.s; as fstrip.s; mv a.out fstrip
+echo getty.s; as getty.s; mv a.out getty
+echo init.s; as init.s; mv a.out init
+echo ln.s; as ln.s; mv a.out ln
+echo login.s; as login.s; mv a.out login
+echo ls.s; as ls.s; mv a.out ls
+echo sh.s; as sh.s; mv a.out sh
+echo db; as db?.s; mv a.out db
+echo ld; as ld?.s; mv a.out ld
+echo as2; as as2?.s; mv a.out as2
+echo as; as as1?.s; mv a.out as
+
+echo Not bas, missing source files
+echo Not dc, uses the mul instruction
+echo ... install new "as" to build dc
+echo Not fed, uses the div instruction
+echo ... also cannot be built using new as
+echo Not form, uses the ashc instruction
+echo ... install new "as" to build dc
+
+echo You can rm ':' acct ar cat chmod chown
+echo You can rm cmp date df dsw dusg fstrip getty
+echo You can rm init ln login ls sh as as2 db ld

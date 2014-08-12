@@ -50,8 +50,9 @@ A quick `pcregrep -Mi 'case.*\n.*case' * | wc -l` in the `c` directory shows `16
 
 References to source code of early compilers:
 
-* Sixth edition of Unix by Bell laboratories released in May 1975, which is designed to run on the PDP-11. The [files](http://minnie.tuhs.org/Archive/PDP-11/Distributions/research/Dennis_v6/) are from [Dennis Ritchie](https://en.wikipedia.org/wiki/Dennis_Ritchie). The compiler can be found in the `c/` directory.
 * Ritchie [describes](http://www.cs.bell-labs.com/who/dmr/primevalC.html) a DECtape found by Paul Vixie and Keith Bostic. Which can be found on github elsewhere as well as [legacy-cc](https://github.com/mortdeus/legacy-cc). To honor Ritchie it is here added in his words as "primeval C".
+* This code is by a combined effort from others combined to a running system at [google code](https://code.google.com/p/unix-jun72/), and put here in the folder [unix_v1].
+* Sixth edition of Unix by Bell laboratories released in May 1975, which is designed to run on the PDP-11. The [files](http://minnie.tuhs.org/Archive/PDP-11/Distributions/research/Dennis_v6/) are from [Dennis Ritchie](https://en.wikipedia.org/wiki/Dennis_Ritchie). The compiler can be found in the [unix_v6] folder and then the `c/` directory.
 
 # Todo
 

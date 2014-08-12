@@ -1,0 +1,56 @@
+				/ area
+1:
+	tst	(sp)+ / increment sp
+1:
+	tst	2(r5) / is char count for tty buffer = 0
+	beq	1f / yes
+	movb	*4(r5),r1 / no, move character pointer to r1
+	inc	4(r5) / increment character pointer
+	dec	2(r5) / decrement character count
+	jsr	r0,passc / place character, whose address is in
+			 / r1, in
+	br	1b / user buffer area. Then get next character.
+1:
+	jmp	ret
+
+rcvch:
+	mov	4(sp),r2 / 0%8 r2 contains 8xtty number
+	mov	$4,r1
+	bit	r1,rcsr(r2) / is carrier detection bit on
+	bne	1f / yes
+	bic	$1,rcsr(r2) / no, clear data terminal ready bit
+	rts	r0
+1:
+	movb	tty+3(r2),0f / make cc offset arg for "getc"
+	mov	$240,*$ps / set processor priority = 5
+	jsr	r0,getc; 0:.. / get next character off clist
+		br 2f / clist empty
+	clr	*$ps / set processor priority = 0
+	rts	r0
+2:
+	mov	0b,0f / make "getc" arg an arg for "sleep"
+	mov	r5,-(sp) / save tty buffer address on stack
+	jsr	r0,sleep; 0:..
+	mov	(sp)+,r5
+	br	rcvch
+
+ocvt:
+	sub	$28.,r1 / 0%2 calculate tty table offset
+	mov	r1 ,r2
+	asl	r1 / 0%4
+	asl	r1 / 0%8
+	mov	r1,-(sp)
+	add	$6,r2 / calculate clist id  clist offset
+	movb	r2,tty+3(r1) / put clist id in tty table
+1:
+	mov	(sp),r1
+	bit	$4,rcsr(r1) / carrier detect bit set
+	bne	1f / if so, branch
+	mov	$511,rcsr(r1) / set ready, speed, interrupt enable,
+			      / supervisor transmit
+	movb	tty+3(r1),0f / put clist id in sleep argument
+	jsr	r0,sleep; 0:..
+	br	1b
+1:
+	mov	tty+6(r1),r5 / put tty buffer address in r5
+	tstb	(r5) / first byte of tty buffer = 0

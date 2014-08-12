@@ -1,0 +1,23 @@
+--- rebuilt/u0.s	Mon May  5 17:57:35 2008
++++ build/u0.s	Mon May  5 17:57:54 2008
+@@ -43,7 +43,7 @@
+ .endif
+ 
+ core = orig+40000  / specifies beginning of user's core
+-ecore = core+20000 / specifies end of user's core (4096 words)
++ecore = core+40000 / specifies end of user's core (4096 words)
+ 
+        4;4     / init by copy
+        unkni;0 / " error
+@@ -159,9 +162,9 @@
+ 
+ 	mov    $1024.-64.,r1 / highest drum address; high 64 blks allocated
+                               / to UNIX
+-	mov    $p.dska,r2 / p.dska contains dis addresses for processes
++	mov    $p.dska,r2 / p.dska contains disk addresses for processes
+ 1 :
+-	sub    $17.,r1 / 17 blocks per process
++	sub    $33.,r1 / 33 blocks per process, allows 16K per process
+ 	mov    r1,(r2)+
+ 	cmp    r2,$p.dska+nproc+nproc
+ 	bne    1b

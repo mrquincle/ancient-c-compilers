@@ -1,0 +1,31 @@
+#!/bin/sh
+#
+# use the v2 assembler to assemble some userland code into an 0405 binary.
+# Requires the first .s file to set ". = . + 40014".
+#
+# example, mount.s:
+#   exit  = 1.
+#   write = 4.
+#   mount = 21.
+#   .. = 40014
+#   
+#        mov     $1,r0
+#        sys     write; rk0; 8.
+#        sys     write; usr; 4.
+#        sys mount; rk0; usr
+#        sys exit
+#        sys exit
+#   
+#   rk0:    </dev/rk0\0>
+#   usr:    </usr\0>
+#
+# $ tools/as mount.s
+# $ cp b.out mymount
+#
+
+APOUT=tools/apout/apout
+APOUT_ROOT=fs/root
+export APOUT_ROOT
+$APOUT $APOUT_ROOT/bin/as "$@" && tools/fixaout.py
+
+

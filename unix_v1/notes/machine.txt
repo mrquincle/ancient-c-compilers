@@ -1,0 +1,142 @@
+Collection of notes on the hardware this should run on.
+
+------------------
+device layout per u0 src:
+
+            address                     simh dev
+rk03/rk11   177400     disk		RK
+dc11        174000     tty?		(not supp?)
+tc11/tu56   177340     dec tape 	DTn (not showing up in simh?)
+rf11/rs11   177460     fixed head disk	RF
+kw11-l      177546     clock		CLK
+pc11        177550     paper tape	PTR/PTP
+asr-33      177560     tty?		TTI, TTO
+
+
+------------------
+man IV tap0 ... tap7 :
+"all eight files exist even though at present there are only two physical
+drives."
+
+man IV tty
+claims that tty is treated differently than tty0..tty5 and implies
+that it is not used in multi-user mode.  This may pose a problem
+if DC-11 is not supported.. we may only be able to run in single user
+mode.
+"By appropriate console switch settings, it is possible to cause UNIX
+to come up as a single-user system with I/O on this device."
+
+man IV tty0 ... tty5
+says there are six tty devices.  u0 srcs sets ntty to 8+1 (8 dc-11 plus
+one console?)
+
+man V core
+"It is exactly 8192+64 bytes long" 8k of user core.
+this agrees with the definition of core in u0 as 4096 words long.
+This also lines up with the statement that there was 24k ram:
+u0 sets orig to 0, and core to 16k and ecore to 24k (core+8k).
+
+------------------
+set rk3 enabled
+att rk3 rk3.dsk
+set rf enabled
+set cpu 11/20
+set cpu 32K       ?    there was really just 24k in the real machine
+
+
+-----------------------
+Disks:
+   rf0 - 1024 blocks, always mounted, has root and swap.
+         last 64 blocks (32kbyte) allocated to swap by u0.s
+         u0.s can setup rudimentary fs on this if built with "cold=1"
+   rk0 - 4871 blocks
+
+
+u0.s sets up rf0 as:
+
+   - superblock layout
+     - free storage map contains 128 bytes
+     - inode map contains 64 bytes
+
+   - allocate top 64 blocks "to unix"  (960..1023)
+   - allocate 17 blocks per process (nproc) (688..960 - 16 procs)
+   - free blocks 687..34 
+   - zero out blocks 33..1 for use as inodes 
+     (and 2nd half of superblock which is unused?)
+
+   - for each special inode i-1 to i-40 initialize it
+     - mode 100017 (allocated, read, write, other read, othe write)
+     - num links = 1
+     - uid = 1 (yup, not root)
+     - fill in timestamp info
+
+  - write out premade i-nodes on i-41 .. i-47
+    with premade directory data.
+    i-41 root (with dev, bin, etc, usr, tmp)
+    i-42 dev (with tty, ppt, mem, rf0, rk0, tap0 .. tap7, tty0..tty7, lpr, tty8)
+    i-43 bin (empty)
+    i-44 etc (with init)
+    i-45 usr (empty)
+    i-46 tmp (empty)
+    i-47 init (binary, included in u0.s)
+         special version that opens /dev/tap0 and reads files from it,
+         creates them, chmods them and chowns them
+
+special init:
+   - seek to 65
+   again:
+      - read 512 bytes
+      - use first word as size, if zero, break out of loop
+      - call create with name at offset 4
+      - call chmod with byte at offset 2
+      - call chown with byte at offset 3
+        - read 512 bytes from tape
+        - write min(remaining len, 512) to disk
+        - decrement remaining len and loop if more left
+      - close file
+      - loop to again
+
+tape image format:
+
+  for each file:
+    first block:
+        size : word, zero for end
+        mode : byte 
+               (setuid, exec, user read, user write, other read, other write)
+        uid : byte
+        name : 8 bytes
+    followed by ((size+511) / 512) blocks of data.
+  EOF is marked by zero length file.
+
+
+
+
+-----------------------
+cpu
+    probably 11/20 with 24kb  (or should that be 24k words = 48k?)
+    could be 11/45 though.
+pdp-11 releases:
+    1970: 11/20, 11/15 
+    1972: 11/40, 11/45, 11/05, 11/10 
+    1973: 11/35 
+
+"In 1971, when this manual was written, we had move off the original PDP-7
+to the PDP-11/20; it had 24KB of core memory, and no memory management 
+hardware at all. "
+[...]
+"By this time we knew about the upcoming PDP-11/45, and had visited 
+Digital in Maynard to talk about it; in particular, we had the specs 
+for the floating-point instructions it supported. So the system 
+described here included a simulator for the instructions (fptrap(III))."
+   - http://www.cs.bell-labs.com/who/dmr/1stEdman.html
+     (describing nov 3, 1971 manuals)
+
+-------------------------------------
+section VII pg 5 has "boot procedures" section:
+http://cm.bell-labs.com/cm/cs/who/dmr/man71.pdf
+
+------------------------------------
+http://en.wikipedia.org/wiki/PDP-11#PDP-11_instruction_repertoire
+
+Has a reference on all the AS instructions in the PDP-11. This may come in
+handy while fixing the OCR text.
