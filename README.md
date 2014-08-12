@@ -53,6 +53,9 @@ References to source code of early compilers:
 * Sixth edition of Unix by Bell laboratories released in May 1975, which is designed to run on the PDP-11. The [files](http://minnie.tuhs.org/Archive/PDP-11/Distributions/research/Dennis_v6/) are from [Dennis Ritchie](https://en.wikipedia.org/wiki/Dennis_Ritchie). The compiler can be found in the `c/` directory.
 * Ritchie [describes](http://www.cs.bell-labs.com/who/dmr/primevalC.html) a DECtape found by Paul Vixie and Keith Bostic. Which can be found on github elsewhere as well as [legacy-cc](https://github.com/mortdeus/legacy-cc). To honor Ritchie it is here added in his words as "primeval C".
 
+# Todo
+
+Cardeva made a lot of source available on the Unix Archive, e.g. see the [minnie.tush.org mirror](http://www.tuhs.org/Archive/PDP-11/Distributions/). Interesting code needs to be extracted from there.
 
 # Documentation
 
