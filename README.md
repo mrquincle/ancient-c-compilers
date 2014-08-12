@@ -44,6 +44,7 @@ But probably more like this:
 
 Just my two cents, but I personally understand why people who love switches would love breaks as well, especially if the horizontal screen estate was much more limited in those days.
 
+A quick `pcregrep -Mi 'case.*\n.*case' * | wc -l` in the `c` directory shows `166` fall-throughs by the way, and these are only subsequent `case` statements on subsequent lines. I would say, that's quite a lot on a total of `grep -ri case . | wc -l`: `459`. 
 
 # Source code
 
